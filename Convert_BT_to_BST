@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int value) {
+        data = value;
+        left = null;
+        right = null;
+    }
+}
+
+class BinarySearchTree {
+    // Function to insert a new node into the BST
+    public Node insert(Node root, int val) {
+        if (root == null) {
+            return new Node(val); // Create a new node if root is null
+        }
+        if (val < root.data) {
+            root.left = insert(root.left, val); // Insert in the left subtree
+        } else if (val > root.data) {
+            root.right = insert(root.right, val); // Insert in the right subtree
+        }
+        return root; // Return the unchanged root
+    }
+
+    // Function for inorder traversal of the BST
+    public void inorderTraversal(Node root) {
+        if (root == null) {
+            return;
+        }
+        inorderTraversal(root.left); // Visit left subtree
+        System.out.print(root.data + " "); // Print current node's value
+        inorderTraversal(root.right); // Visit right subtree
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        BinarySearchTree bst = new BinarySearchTree();
+        Node root = null;
+
+        System.out.print("Enter the number of nodes: ");
+        int n = sc.nextInt();
+
+        System.out.println("Enter the nodes: ");
+        for (int i = 0; i < n; i++) {
+            int value = sc.nextInt();
+            root = bst.insert(root, value); // Update root after insertion
+        }
+
+        System.out.print("Inorder Traversal of the BST: ");
+        bst.inorderTraversal(root); // Print the BST in sorted order
+        System.out.println();
+
+        sc.close();
+    }
+}
