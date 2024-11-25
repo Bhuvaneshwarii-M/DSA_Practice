@@ -1,1 +1,100 @@
+import java.util.Scanner;
 
+class Node {
+    int data;
+    Node left;
+    Node right;
+
+    Node(int val) {
+        data = val;
+        left = null;
+        right = null;
+    }
+}
+
+public class Main {
+    static Node root = null;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter root data");
+        int d = sc.nextInt();
+        root = new Node(d); // Create the root node
+
+        // Build the binary tree by allowing dynamic node insertion
+        while (true) {
+            System.out.println("Enter number:: 1.left 2.right 3.exit");
+            int x = sc.nextInt();
+            if (x == 1) {
+                System.out.println("Enter parent node data to insert left child");
+                int parentData = sc.nextInt();
+                System.out.println("Enter left child data");
+                int childData = sc.nextInt();
+                insertLeft(parentData, childData);
+            } else if (x == 2) {
+                System.out.println("Enter parent node data to insert right child");
+                int parentData = sc.nextInt();
+                System.out.println("Enter right child data");
+                int childData = sc.nextInt();
+                insertRight(parentData, childData);
+            } else {
+                break;
+            }
+        }
+
+        // Perform inorder traversal and print the result
+        System.out.println("Inorder Traversal of Binary Tree:");
+        inorderTraversal(root);
+    }
+
+    // Function to insert a left child at the correct node
+    private static void insertLeft(int parentData, int childData) {
+        Node parentNode = findNode(root, parentData);
+        if (parentNode != null && parentNode.left == null) {
+            parentNode.left = new Node(childData);
+            System.out.println("Left child inserted.");
+        } else {
+            System.out.println("Left child insertion failed. Parent may not exist or left child already exists.");
+        }
+    }
+
+    // Function to insert a right child at the correct node
+    private static void insertRight(int parentData, int childData) {
+        Node parentNode = findNode(root, parentData);
+        if (parentNode != null && parentNode.right == null) {
+            parentNode.right = new Node(childData);
+            System.out.println("Right child inserted.");
+        } else {
+            System.out.println("Right child insertion failed. Parent may not exist or right child already exists.");
+        }
+    }
+
+    // Function to find a node by its data (used for finding parent nodes)
+    private static Node findNode(Node root, int data) {
+        if (root == null) {
+            return null;
+        }
+        if (root.data == data) {
+            return root;
+        }
+
+        // Search in left and right subtrees
+        // return findNode(root.left, data);
+        Node leftResult = findNode(root.left, data);
+        
+        if (leftResult != null) {
+            return leftResult;
+        }
+        return findNode(root.right, data);
+    }
+
+    // Function for inorder traversal of the tree
+    private static void inorderTraversal(Node root) {
+        if (root != null) {
+            inorderTraversal(root.left);   // Visit left subtree
+            System.out.print(root.data + " ");  // Visit node
+            inorderTraversal(root.right);  // Visit right subtree
+        }
+    }
+}
