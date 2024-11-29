@@ -1,0 +1,119 @@
+import java.util.*;
+class Node{
+   int data;
+   Node next;
+   public Node(int val){
+     this.data=val;
+     this.next=null;
+  }
+
+}
+
+class Solution{
+	
+     public static void main(String[] args) {
+    	Node head=new Node(0);
+    	 Node temp=head;
+    	 Scanner sc=new Scanner(System.in);
+    	 int size=sc.nextInt();
+    	 for(int i=0;i<size;i++) {
+    		 int d=sc.nextInt();
+    		 Node t=new Node(d);
+    		 temp.next=t;
+    		 temp=temp.next;
+    	 }
+    	Node ptr=head.next;
+    	while(ptr!=null) {
+    		System.out.print(ptr.data+" ");
+		ptr=ptr.next;
+
+    	}
+
+    	System.out.println("1.insert at beg 2.insert at mid 3.insert at end");
+       int input=sc.nextInt();
+       outside obj=new outside();
+       switch(input){
+    	   case 1:
+    		 
+    		   obj.insertAtBeg(head.next);
+    		   break;
+    	   case 2:
+    		
+    		   obj.insertAtPos(head.next);
+    		   break;
+    	   case 3:
+    		  
+    		   obj.insertAtEnd(head.next);
+    		   break;
+    	   default:
+    		   System.out.println("invalid input");
+    		   
+       }
+              
+       
+     }
+     
+}
+
+
+
+class outside{
+	public void insertAtBeg(Node head) {
+	     System.out.println("insert at beg");	
+	     Scanner sc=new Scanner(System.in);
+	     int d=sc.nextInt();
+	     Node t=new Node(d);
+	     t.next=head;
+	     head=t;
+	     Node ptr=head;
+	    	while(ptr!=null) {
+	    		System.out.print(ptr.data+" ");
+			ptr=ptr.next;
+
+	    	}
+	    
+	}
+	public void insertAtPos(Node head) {
+		Node ptr=head;
+		System.out.println("Enter the position to which data is added");
+			
+	     Scanner sc=new Scanner(System.in);
+	     int p=sc.nextInt();
+	     System.out.println("Enter the data");
+	     int d=sc.nextInt();
+	     Node t=new Node(d);
+	     int l=1;
+	     while(l<p-1) {
+	    	 l++;
+	    	 ptr=ptr.next;
+	    	 
+	     }
+	     t.next=ptr.next;
+	     ptr.next=t;
+	     Node pt=head;
+	    	while(pt!=null) {
+	    		System.out.print(pt.data+" ");
+			pt=pt.next;
+
+	    	}
+	     
+		}
+	public void insertAtEnd(Node head) {
+		Node ptr=head;
+		System.out.println("Enter the data");
+			
+	     Scanner sc=new Scanner(System.in);
+	    int d=sc.nextInt();
+	    Node t=new Node(d);
+	    while(ptr.next!=null) {
+	    	ptr=ptr.next;
+	    }
+	    ptr.next=t;
+	    Node pt=head;
+    	while(pt!=null) {
+    		System.out.print(pt.data+" ");
+		pt=pt.next;
+
+    	}
+	}	
+}
