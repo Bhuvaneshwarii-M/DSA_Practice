@@ -1,0 +1,80 @@
+public class MergeSort {
+
+    // Merge Sort function
+    public static void mergeSort(int[] arr) {
+        if (arr.length < 2) {
+            return;
+        }
+        
+        int mid = arr.length / 2;
+        
+        // Split the array into two halves
+        int[] left = new int[mid];
+        int[] right = new int[arr.length - mid];
+
+
+  //   for (int i = 0; i < mid; i++) {
+  //      left[i] = arr[i];
+  //  }
+  //  for (int i = mid; i < size; i++) {
+  //      right[i - mid] = arr[i];
+  //  }
+
+////////System.arraycopy(sourceArray, sourceStartIndex, destinationArray, destinationStartIndex, lengthToCopy);
+        
+        System.arraycopy(arr, 0, left, 0, mid);
+        System.arraycopy(arr, mid, right, 0, arr.length - mid);
+        
+        // Recursively sort the left and right halves
+        mergeSort(left);
+        mergeSort(right);
+        
+        // Merge the sorted halves
+        merge(arr, left, right);
+    }
+
+    // Merge function to combine the sorted halves
+    private static void merge(int[] arr, int[] left, int[] right) {
+        int i = 0, j = 0, k = 0;
+
+        // Merge the arrays while there are elements in both
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) {
+                arr[k++] = left[i++];
+            } else {
+                arr[k++] = right[j++];
+            }
+        }
+
+        // Copy remaining elements from left array (if any)
+        while (i < left.length) {
+            arr[k++] = left[i++];
+        }
+
+        // Copy remaining elements from right array (if any)
+        while (j < right.length) {
+            arr[k++] = right[j++];
+        }
+    }
+
+    // Main function to test the Merge Sort
+    public static void main(String[] args) {
+        int[] arr = { 12, 11, 13, 5, 6, 7 };
+        
+        System.out.println("Original array:");
+        printArray(arr);
+
+        mergeSort(arr);
+
+        System.out.println("\nSorted array:");
+        printArray(arr);
+    }
+
+    // Utility function to print the array
+    private static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+}
