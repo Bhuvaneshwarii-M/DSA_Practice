@@ -1,3 +1,14 @@
+// i=-1,j=0,p=arr.length-1
+//arr[j]>arr[p]   =======>>>> j+=1
+//if(arr[j]<=arr[p])
+//      i+=1
+//      if(j>i)
+//             swap(arr[i],arr[j])
+//      else if(j==i)
+//             j+=1
+//swap(arr[p],arr[i+1])
+
+
 class Solution{
 	public static void main(String[] args) {
 		int[] arr= {3,2,5,0,1,8,7,6,9,4};
