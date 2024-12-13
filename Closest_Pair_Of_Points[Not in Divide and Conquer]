@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    // Class to represent a point in the 2D plane
+    static class Point {
+        double x, y;
+
+        Point(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    // Function to calculate the distance between two points
+    public static double distance(Point p1, Point p2) {
+        return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+    }
+
+    // Brute force function to find the closest pair distance
+    public static double findClosestPair(Point[] points) {
+        int n = points.length;
+        if (n < 2) {
+            // Not enough points to form a pair
+            throw new IllegalArgumentException("At least two points are required.");
+        }
+
+        double minDist = Double.MAX_VALUE;
+
+        // Iterate through all pairs of points
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                // Calculate the distance between points[i] and points[j]
+                double dist = distance(points[i], points[j]);
+
+                // Update the minimum distance if needed
+                if (dist < minDist) {
+                    minDist = dist;
+                }
+            }
+        }
+
+        return minDist;
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the number of points:");
+        int n = scanner.nextInt();
+
+        Point[] points = new Point[n];
+
+        System.out.println("Enter the coordinates of each point (x and y):");
+        for (int i = 0; i < n; i++) {
+            double x = scanner.nextDouble();
+            double y = scanner.nextDouble();
+            points[i] = new Point(x, y);
+        }
+
+        double closestDistance = findClosestPair(points);
+
+        System.out.println("The smallest distance between two points is: " + closestDistance);
+        scanner.close();
+    }
+}
