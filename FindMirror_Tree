@@ -1,0 +1,41 @@
+class Node{
+    int d;
+    Node l,r;
+    Node(int val){
+        this.d=val;
+        this.l=null;
+        this.r=null;
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		Node root=new Node(1);
+		root.l=new Node(2);
+		root.l.l=new Node(4);
+		root.l.r=new Node(5);
+		root.r=new Node(3);
+		inordertraversal(root);
+		findmirror(root);
+		inordertraversal(root);
+	}
+	private static void inordertraversal(Node root){
+	    if(root==null){
+	        return;
+	    }
+	    inordertraversal(root.l);
+	    System.out.println(root.d);
+	    inordertraversal(root.r);
+	}
+	private static void findmirror(Node root){
+	    if(root==null){
+	        return;
+	    }
+	    Node temp=root.l;
+	    root.l=root.r;
+	    root.r=temp;
+	    findmirror(root.l);
+	    findmirror(root.r);
+	}
+}
