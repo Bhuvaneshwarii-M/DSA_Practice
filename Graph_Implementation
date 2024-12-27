@@ -1,0 +1,55 @@
+class Vertex<T> {
+    T data; // Data associated with the vertex
+    List<Vertex<T>> neighbors; // Adjacency list to store neighboring vertices
+
+    Vertex(T data) {
+        this.data = data;
+        this.neighbors = new ArrayList<>();
+    }
+
+    void addNeighbor(Vertex<T> vertex) {
+        neighbors.add(vertex);
+    }
+}
+import java.util.*;
+
+public class Graph<T> {
+    private List<Vertex<T>> vertices; // List of all vertices in the graph
+
+    public Graph() {
+        vertices = new ArrayList<>();
+    }
+
+    public void addVertex(T data) {
+        vertices.add(new Vertex<>(data));
+    }
+
+    public void addEdge(Vertex<T> from, Vertex<T> to) {
+        from.addNeighbor(to);
+    }
+
+    public List<Vertex<T>> getVertices() {
+        return vertices;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Graph<String> graph = new Graph<>();
+
+        Vertex<String> v1 = new Vertex<>("A");
+        Vertex<String> v2 = new Vertex<>("B");
+        Vertex<String> v3 = new Vertex<>("C");
+
+        graph.addVertex(v1.data);
+        graph.addVertex(v2.data);
+        graph.addVertex(v3.data);
+
+        v1.addNeighbor(v2);
+        v2.addNeighbor(v3);
+
+        List<Vertex<String>> allVertices = graph.getVertices();
+        for (Vertex<String> vertex : allVertices) {
+            System.out.println("Vertex: " + vertex.data);
+        }
+    }
+}
