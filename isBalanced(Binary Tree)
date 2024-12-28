@@ -1,0 +1,42 @@
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int d){
+        this.data=d;
+        this.left=null;
+        this.right=null;
+    }
+}
+public class Main
+{
+    Node root;
+    private static int height(Node rt){
+        if(rt==null){
+            return 0;
+        }
+        return 1+Math.max(height(rt.left),height(rt.right));
+    }
+    private static boolean isBalanced(Node rt){
+        if(rt==null){
+            return true;
+        }
+        
+        int lh=height(rt.left);
+        int rh=height(rt.right);
+        if(Math.abs(lh-rh)<=1 && isBalanced(rt.left) && isBalanced(rt.right)){
+            return true;
+        }
+        return false;
+    }
+	public static void main(String[] args) {
+		
+	    Main tree=new Main();
+	    tree.root=new Node(0);
+	    tree.root.left=new Node(1);
+	    tree.root.right=new Node(2);
+	    tree.root.left.right=new Node(3);
+	    tree.root.right.right=new Node(4);
+	    System.out.println(isBalanced(tree.root));
+	}
+}
